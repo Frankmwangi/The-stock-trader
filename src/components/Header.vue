@@ -51,9 +51,10 @@
         }
       },
       methods: {
-        ...mapActions([
-           'randomizedStocks'
-        ]),
+        ...mapActions({
+           randomizedStocks: 'randomizedStocks',
+           fetchData: 'loadData'
+        }),
         endDay() {
           this.randomizedStocks();
         },
@@ -67,7 +68,7 @@
           this.$http.put('data.json', data);
         },
         loadData() {
-          
+          this.fetchData();
         }
       }
 
