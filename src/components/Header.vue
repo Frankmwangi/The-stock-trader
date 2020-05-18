@@ -15,8 +15,10 @@
        </ul>
       <strong class="navbar-text navbar-right">Funds: {{ funds }}</strong>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">End Day</a></li>
-        <li class="dropdown">
+        <li><a href="#" @click="endDay">End Day</a></li>
+        <li class="dropdown" 
+        :class="{open: isDropdownopen}"
+        @click=" isDropdownopen =  !isDropdownopen">
           <a 
           href="#" 
           class="dropdown-toggle" 
@@ -36,11 +38,26 @@
 </nav>
 </template>
 <script>
+  import {mapActions} from 'vuex';
     export default {
+      data(){
+        return {
+          isDropdownopen: false
+        }
+      },
       computed: {
         funds() {
           return this.$store.getters.funds;
         }
+      },
+      methods: {
+        ...mapActions([
+           'randomizedStocks'
+        ]),
+        endDay() {
+          this.randomizedStocks();
+        }
       }
+
     }
 </script>
